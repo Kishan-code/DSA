@@ -24,13 +24,13 @@
 using namespace std;
 
 // Brute force:
-int largeElem1(vector<int>  arr){
+int largeElem1(vector<int>&  arr){
     sort(arr.begin(), arr.end());
     return arr.at(arr.size()-1);
 }
 
 // Optimal:
-int largeElem2(vector<int> arr){
+int largeElem2(vector<int>& arr){
     int maxElem = arr[0];
     for(int i = 0; i < arr.size(); i++){
         if(maxElem < arr[i]){

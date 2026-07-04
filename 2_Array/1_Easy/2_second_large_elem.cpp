@@ -17,7 +17,10 @@
 using namespace std;
 
 // Brute force:
-int secondLargeElem1(vector<int>  arr){
+int secondLargeElem1(vector<int>&  arr){
+    if(arr.size() < 2)
+        throw invalid_argument("Second largest does not exist.");
+
     sort(arr.begin(), arr.end());
     int i = arr.size()-2;
     while(i >= 0){
@@ -26,7 +29,8 @@ int secondLargeElem1(vector<int>  arr){
         }
         i--;
     }
-    return arr[0];
+
+    throw invalid_argument("Second largest does not exist.");
 }
 
 int main(){
