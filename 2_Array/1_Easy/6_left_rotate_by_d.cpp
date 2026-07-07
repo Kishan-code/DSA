@@ -25,11 +25,25 @@
  * 
  * TC  -> O(d+n)
  * SC -> O(d)
+ * ********************************************************************
+ * 
+ * Approach -3: Optimal:
+ * using reverse:
+ * 1) reverse arr from 0th to (d-1)th index [d = 3] => [TC -> O(d)]
+ *      [1,2,3,4,5,6,7] -> [3,2,1,4,5,6,7]
+ * 2) reverse arr from dth to (n-1)th index [n=7] => [TC -> O(n-d)]
+ *      [3,2,1,4,5,6,7] -> [3,2,1,7,6,5,4]
+ * 3) reverse arr from 0th to (n-1)th index => [TC -> O(n)]
+ *      [3,2,1,7,6,5,4] -> [4,5,6,7,1,2,3]
+ * 
+ * TC -> O(2n)
+ * SC -> O(1)
  */
 
  #include<iostream>
  using namespace std;
-
+ 
+ // Brute force:
  void leftRotate1(int* arr, int n, int d){
     for(int i = 0; i < d; i++){
         int temp = arr[0];
@@ -39,7 +53,8 @@
         arr[n-1] = temp;
     }
  }
-
+ 
+ // Better:
  void leftRotate2(int* arr, int n, int d){
     int temp[d];
     int i;
@@ -60,11 +75,28 @@
     }
  }
 
+ // Optimal:
+ void reverse(int* arr, int low, int high){
+    while(low < high){
+        int temp = arr[low];
+        arr[low] = arr[high];
+        arr[high] = temp;
+        low++;
+        high--;
+    }
+ }
+
 
  int main(){
-    int n = 7, d = 3;
+    int n = 7, d = 4;
     int arr[n] = {1,2,3,4,5,6,7};
-    leftRotate2(arr, n, d);
+
+    // leftRotate1(arr, n, d);
+    // leftRotate2(arr, n, d);
+
+    reverse(arr,0,d-1);
+    reverse(arr,d,n-1);
+    reverse(arr,0,n-1);
 
     for(auto x: arr)
         cout<<x<<" ";
