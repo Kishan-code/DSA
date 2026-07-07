@@ -8,6 +8,8 @@
  * store 0th index element in temp => (temp = arr[0])
  * now shift all the elements of array left by one place;
  * put arr[n-1] = temp
+ * TC -> O(n)
+ * SC -> O(n)[for using another space] otherwise O(1)
  */
 
  #include<iostream>
