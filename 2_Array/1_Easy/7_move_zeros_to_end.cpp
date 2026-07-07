@@ -10,6 +10,19 @@
  * 
  * TC -> O(2n)
  * SC -> O(x) [x = no. of non zero elements]
+ * ***********************************************************************
+ * 
+ * Approach -2: Optimal (Two pointer):
+ * create two pointers i and j;
+ * initialize j = 0
+ * for(i = 0 ->  n)
+ * if(arr[j] != 0) then j++
+ * else if(arr[j] == 0 && arr[i] != 0) 
+ *      then swap(arr[i], arr[j]) and j++;
+ * 
+ * TC -> O(n)
+ * SC -> O(1)
+ * 
  */
 
  #include<iostream>
@@ -39,10 +52,27 @@
     }
  }
 
+ // Optimal:
+ void moveZeros2(vector<int> &v){
+    int i = 0, j = 0;
+    while(i < v.size()){
+        if(v[j] != 0){
+            j++;
+        }
+        else if(v[j] == 0 && v[i] != 0){
+            int temp = v[i];
+            v[i] = v[j];
+            v[j] = temp;
+            j++;
+        }
+        i++;
+    }
+ }
+
 int main(){
     vector<int> arr = {1,0,2,3,2,0,0,4,5,1};
 
-    moveZeros1(arr);
+    moveZeros2(arr);
 
     for(auto x: arr)
         cout<<x<<" ";
