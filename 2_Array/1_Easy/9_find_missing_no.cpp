@@ -51,6 +51,7 @@
  #include<algorithm>
  using namespace std;
 
+ // Brute force:
  int findMissingNum1(vector<int> &v){
     sort(v.begin(), v.end());
 
@@ -65,6 +66,7 @@
     return i;
  }
 
+ // Better (using hash map):
  int findMissingNum2(vector<int> &v){
     map<int, int> mp;
 
@@ -83,6 +85,7 @@
     return j;
  }
 
+ // Optimal (using sum):
  int findMissingNum3(vector<int> &v){
     int arrSum = 0, exactSum = 0;
     int n = v.size();
