@@ -32,6 +32,16 @@
  * 
  * TC -> O(2n)
  * SC -> O(n)
+ * *********************************************************************
+ * 
+ * Approach -3: Optimal:
+ * get the exact sum of n number using formula: n(n+1)/2
+ * and get the sum of all numbers present in the array
+ * if exact sum is equal to array sum then retrun 0
+ * otherwise return (exact sum) - (array sum)
+ * 
+ * TC -> O(n)
+ * SC -> O(1)
  */
 
 
@@ -73,10 +83,25 @@
     return j;
  }
 
+ int findMissingNum3(vector<int> &v){
+    int arrSum = 0, exactSum = 0;
+    int n = v.size();
+
+    exactSum = (n*(n+1))/2;
+
+    for(auto x: v){
+        arrSum += x;
+    }
+
+    if(arrSum == exactSum) return 0;
+    else return exactSum - arrSum;
+ }
+
  int main(){
 
     vector<int> arr = {0, 1, 2, 4, 5, 6};
     // cout<<findMissingNum1(arr);
-    cout<<findMissingNum2(arr);
+    // cout<<findMissingNum2(arr);
+    cout<<findMissingNum3(arr);
     return 0;
  }
