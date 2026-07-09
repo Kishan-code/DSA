@@ -18,7 +18,7 @@
  * then i++
  * otherwise break the loop end return i;
  * 
- * TC -> if array is sorted then -> O(n) otherwise O(logn)+O(n)
+ * TC -> if array is sorted then -> O(n) otherwise O(nlogn)+O(n)
  * SC -> O(1)
  * ************************************************************************
  * 
