@@ -34,6 +34,20 @@
  * 
  * TC -> O(nlogm) + O(n/2 + 1) => m is the size of the map
  * SC -> O(n/2 + 1)
+ * 
+ * *************************************************************************
+ * 
+ * Approach -3: Optimal (using XOR):
+ * use the properties of XOR (^) operator:
+ * a ^ a = 0
+ * 0 ^ a = a ^ 0 = a
+ * 
+ * create a variable ans = 0
+ * iterate on the array and perform (ans = ans ^ nums[i])
+ * return ans;
+ * 
+ * TC -> O(n)
+ * SC -> O(1)
  */
 
  #include<iostream>
@@ -58,7 +72,7 @@
  }
 
 
- // Better;
+ // Better:
   int numAppearOnce2(vector<int> &v){
     map<int, int> mp;
 
@@ -77,12 +91,24 @@
 
  }
 
+ // Optimal:
+  int numAppearOnce3(vector<int> &v){
+    int ans = 0;
+    for(int i = 0; i < v.size(); i++){
+        ans ^= v[i];
+    }
+
+    return ans;
+ }
+
+
 
  int main(){
-    vector<int> arr = {1,1,2,3,3,4,4};
+    vector<int> arr = {1,1,2,3,3,4,4,2,6};
 
     // cout<<numAppearOnce1(arr);
-    cout<<numAppearOnce2(arr);
+    // cout<<numAppearOnce2(arr);
+    cout<<numAppearOnce3(arr);
 
     return 0;
  }
