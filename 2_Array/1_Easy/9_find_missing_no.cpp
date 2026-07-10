@@ -22,7 +22,7 @@
  * SC -> O(1)
  * ************************************************************************
  * 
- * Approach -2: Better (using hashmap):
+ * Approach -2: Better (using hashing / unordered_set):
  * create a map and store all the element as: map[arr[i]] = arr[i];
  * here key and value is same.
  * now iterate the map and form j = 0 to j = n
@@ -47,7 +47,7 @@
 
  #include<iostream>
  #include<vector>
- #include<map>
+ #include<unordered_set>
  #include<algorithm>
  using namespace std;
 
@@ -66,23 +66,17 @@
     return i;
  }
 
- // Better (using hash map):
+ // Better (using hashing / map):
  int findMissingNum2(vector<int> &v){
-    map<int, int> mp;
+    unordered_set<int> st;
 
-    for(int i = 0; i < v.size(); i++){
-        mp[v[i]] = v[i];  
-    }
+    for (int x : v)
+        st.insert(x);
 
-    int j = 0;
-    while(j < v.size()){
-        if(!mp.count(j)){
-            break;
-        }
-        j++;
+    for (int i = 0; i <= v.size(); i++) {
+        if (!st.count(i))
+            return i;
     }
-    
-    return j;
  }
 
  // Optimal (using sum):
