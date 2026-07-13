@@ -29,10 +29,25 @@
  * ***************************************************************
  * 
  * Approach - 3: Optimal (Dutch National Flag Algorithm):
+ * it works on three pointers: low, mid and high.
+ * [0 -> low-1] -> 0 extreme left
+ * [low -> mid-1] -> 1
+ * [high+1 -> n-1] -> 2 extreme right
+ * 
+ * means range [mid -> high] is unsorted and we have to sort it.
+ * put low = 0, mid = 0 and high = n-1
+ * check if(nums[mid] == 0) then swap(nums[low], nums[mid]) and low++, mid++
+ * check if(nums[mid] == 1) then only mid++
+ * check if(num[mid] == 2) then swap(nums[mid], nums[high]) and high--
+ *  do this until (mid <= high)
+ * 
+ * TC -> O(n)
+ * SC -> O(1)
  */
 
  #include<iostream>
  #include<vector>
+ #include<algorithm>
  using namespace std;
 
  // Better:
@@ -55,11 +70,33 @@
     for(i = count_0 + count_1; i < n; i++) v[i] = 2;
  }
 
+ // Optimal: (Dutch Nation flag also)
+ void DNF(vector<int> &v){
+    int n = v.size();
+    int low = 0, mid = 0, high = n-1;
+
+    while(mid <= high){
+        if(v[mid] == 0){
+            swap(v[low], v[mid]);
+            low++;
+            mid++;
+        }
+        else if(v[mid] == 2){
+            swap(v[mid], v[high]);
+            high--;
+        }
+        else{
+            mid++;
+        }
+    }
+ }
+
 
  int main(){
     vector<int> nums = {1,2,0,0,2,0,2,0,1,2,1,2,1,0};
 
-    sorting1(nums);
+    // sorting1(nums);
+    DNF(nums);
 
     for(auto x: nums)
         cout<<x<<" ";
