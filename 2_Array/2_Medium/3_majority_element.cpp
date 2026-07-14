@@ -29,6 +29,25 @@
  * SC -> O(n)
  * **************************************************************
  * 
+ * Approach -3: Optimal (Moore's Voting Algorithm):
+ * in Morre's voting algorith we iterate over the array:
+ * we create two variables freq = 0 (for frequency) and ans (for majority element)
+ * if freq == 0 then put ans = nums[i]
+ * and if (nums[i] == ans) increase frequency by 1 (freq++)
+ * otherwise decrease frequency by 1 (freq--)
+ * 
+ * if element that is mojority in the array i.e., (element > n/2):
+ * then the freq will not be zero for that element
+ * 
+ * for example: [7, 0, 0, 1, 7, 7, 2, 7, 7]
+ * size of this array is 9.
+ * the majority element must be greater then n/2 i.e., ( > 9/2 ≈ 4)
+ * if any element that is greater than 4 let assume its frequency is 5 so remaining elements will be (9-5 = 4)
+ * and freq = 5-4 = 1 which is not equal to zero.
+ * 
+ * TC O(n) + O(n) -> for checking the answer if array might not have majority element
+ * SC O(1)
+ * 
  */
 
  #include<iostream>
@@ -68,12 +87,28 @@
     return -1;
  } 
 
+ // Optimal (Moore's Voting Algorithm):
+ int MVA(vector<int> &v){
+    int n = v.size();
+    int freq = 0;
+    int ans;
+
+    for(int i = 0; i < n; i++){
+        if(0 == freq) ans = v[i];
+        if(v[i] == ans) freq++;
+        else freq--;
+    }
+
+    return ans;
+ } 
+
 
  int main(){
     vector<int> nums = {7, 0, 0, 1, 7, 7, 2, 7, 7};
 
     // cout<<majorityElement1(nums)<<endl;
-    cout<<majorityElement2(nums)<<endl;
+    // cout<<majorityElement2(nums)<<endl;
+    cout<<MVA(nums)<<endl;
 
     return 0;
  }
