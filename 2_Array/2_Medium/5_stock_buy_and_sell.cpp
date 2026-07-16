@@ -17,11 +17,22 @@
  * 
  * TC -> O(n²)
  * SC -> O(1)
+ * ****************************************************************
  * 
+ * Approach -2: Optimal:
+ * iterate loop over the array
+ * check each price and get the minimum price
+ * if current price is minimum then the minPrice then put it into the minPrice 
+ * otherwise check the difference of current price and minPrice is greater then the maxProfit or not
+ * if yes then put their difference in maxProfit and so on...
+ * 
+ * TC -> O(n)
+ * SC -> O(1)
  */
 
  #include<iostream>
  #include<vector>
+ #include<climits>
  using namespace std;
 
 
@@ -41,10 +52,29 @@
     return maxProfit;
  }
 
+ // Optimal:
+ int stockBuyAndSell2(vector<int> &v){
+    int n = v.size();
+    int minPrice = INT_MAX;
+    int maxProfit = 0;
+
+    for(auto price: v){
+        if(price < minPrice){
+            minPrice = price;
+        }
+        else if(price - minPrice > maxProfit){
+            maxProfit = price - minPrice;
+        }
+    }
+
+    return maxProfit;
+ }
+
  int main(){
     vector<int> prices = {10, 7, 5, 8, 11, 9};
 
-    cout<<stockBuyAndSell(prices)<<endl;
+    // cout<<stockBuyAndSell(prices)<<endl;
+    cout<<stockBuyAndSell2(prices)<<endl;
 
     return 0;
  }
