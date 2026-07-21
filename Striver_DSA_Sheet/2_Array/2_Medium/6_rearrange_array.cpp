@@ -24,15 +24,33 @@
  * nums[2*i] = pos[i]
  * nums[2*i+1] = neg[i]
  * 
- * TC - O(2n)
- * SC - O(n)
+ * TC -> O(2n)
+ * SC -> O(n)
+ * *******************************************************************************************
+ * 
+ * Approach -2: Optimal
+ * create two pointers (posIdx = 0) for positive elements and (negIdx = 1) for negative elements.
+ * we know that the number of positive and negative elements will be equal in the given array.
+ * and we have to start with the positive element ans then negative and so on
+ * so on the even indices there will be positive element and on the odd indices there will be negative elements.
+ * so we can store ans arrange the elements in the new array i.e., ans[];
+ * in which:
+ * if(nums[i] > 0)
+ * then ans[posIdx] = nums[i] and posIdx = posIds+2
+ * else ans[negIdx] = nums[i] and negIdx = negIdx+2
+ * 
+ * and after arrnging all the elements we just return this ans[] array.
+ * 
+ * TC -> O(n)
+ * SC -> O(n)
  */
 
  #include<iostream>
  #include<vector>
  using namespace std;
 
- 
+
+ // Brute Force
  void rearrangeArr(vector<int> &v){
     int n = v.size();
     vector<int> pos;
@@ -50,12 +68,35 @@
 
  }
 
+ //Optimal
+ vector<int> rearrangeArr1(vector<int> &v){
+    int n = v.size();
+    vector<int> ans(n);
+
+    int posIdx = 0;
+    int negIdx = 1;
+
+    for(int i = 0; i < n; i++){
+        if(v[i] > 0){ 
+            ans[posIdx] = v[i];
+            posIdx+=2;
+        }
+        else{
+            ans[negIdx] = v[i];
+            negIdx+=2;
+        }
+    }
+
+    return ans;
+ }
+
  int main(){
     vector<int> nums = {3,1,-2,-5,2,-4};
 
-    rearrangeArr(nums);
+    // rearrangeArr(nums);
+    vector<int> ans = rearrangeArr1(nums);
 
-    for(auto x: nums) cout<<x<<" ";
+    for(auto x: ans) cout<<x<<" ";
 
     return 0;
  }
