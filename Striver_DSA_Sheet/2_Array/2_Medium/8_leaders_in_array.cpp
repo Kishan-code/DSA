@@ -19,11 +19,23 @@
  * 
  * TC -> O(n²)
  * SC -> O(n)
+ * *****************************************************************************
+ * 
+ * Approach -2: Optimal
+ * start loop from end of the array to the 0th index and make a variable leader having initial value i.e., leader = INT_MIN
+ * 
+ * if nums[i] > leader then push nums[i] in the answer array and put leader = nums[i]
+ * 
+ * after the end of the loop return the answer array
+ * 
+ * TC -> O(n)
+ * SC -> O(n)
  * 
  */
 
  #include<iostream>
  #include<vector>
+ #include<climits>
  using namespace std;
 
 
@@ -50,10 +62,25 @@
     return ans;
  }
 
+ // Optimal
+ vector<int> leaders1(vector<int> &v){
+    vector<int> ans;
+    int n = v.size();
+    int leader = INT_MIN;
+    for(int i = n-1; i >= 0; i--){
+        if(v[i] > leader){
+            ans.push_back(v[i]);
+            leader = v[i];
+        }
+    }
+    return ans;
+ }
+
  int main(){
     vector<int> nums = {-3, 4, 5, 1, -30, -10};
 
-    vector<int> ans = leaders(nums);
+    // vector<int> ans = leaders(nums);
+    vector<int> ans = leaders1(nums);
 
     for(auto x: ans) cout<<x<<" ";
 
