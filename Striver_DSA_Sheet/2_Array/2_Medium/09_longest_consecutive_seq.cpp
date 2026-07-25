@@ -23,13 +23,32 @@
  * TC -> O(n²)
  * SC -> O(1)
  * ********************************************************************************
+ * 
+ * Approach -2: Better
+ * first we sort the array
+ * and we will keep the track of lastSmaller number
+ * iterate over the array and
+ * if(nums[i] == lastSmaller+1)
+ *  then we increase the count by 1 (count++)
+ *  and put nums[i] in lastSmaller: (lastSmaller = nums[i])
+ * else if(nums[i] != lastSmaller)
+ *  then we set count to 1: (count = 1)
+ *  and put lastSmaller = nums[i]
+ * else we put maxLen = max(maxLen, count)
+ * 
+ * after the end of the loop return maxLen
+ * 
+ * TC ->  O(n) + O(nlogn) [nlogn for sorting the array]
+ * SC -> O(1)
  */
 
  #include<iostream>
  #include<vector>
+ #include<algorithm>
  #include<climits>
  using namespace std;
 
+ // Brute Force
  int longestConsecutive(vector<int> &v){
     int n = v.size();
     int maxLen = 0;
@@ -54,8 +73,33 @@
     return maxLen;
  }
 
+ // Better
+ int longestConsecutive1(vector<int> &v){
+    int n = v.size();
+    int maxLen = 0;
+    int count = 0;
+    int lastSmaller = INT_MIN;
+
+    sort(v.begin(), v.end()); //{0,0,1,2,3,4,5,6,7,8}
+
+    for(int i = 0; i < n; i++){
+        if(v[i] == lastSmaller+1){
+            count++;
+            lastSmaller = v[i];
+        }
+        else if(v[i] != lastSmaller){
+            count = 1;
+            lastSmaller = v[i];
+        }
+        maxLen = max(maxLen, count);
+    }
+
+    return maxLen;
+ }
+
  int main(){
     vector<int> nums = {0, 3, 7, 2, 5, 8, 4, 6, 0, 1};
-    cout<<longestConsecutive(nums);
+    // cout<<longestConsecutive(nums);
+    cout<<longestConsecutive1(nums);
     return 0;
  }
