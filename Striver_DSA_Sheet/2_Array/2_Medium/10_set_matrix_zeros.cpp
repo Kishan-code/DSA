@@ -26,6 +26,36 @@
  * 
  * TC -> O((n*m)*(n*m)+(n*m)) ≃ O(x³)
  * SC -> O(1)
+ * ***********************************************************************************
+ * 
+ * Approach -2: Optimal
+ * create two arrays:
+ * 1) markRow[rows] = {0}
+ * 2) markCol[cols] = {0}
+ * 
+ * iterate over the 2D array and if arr[i][j] == 0
+ * then markRow[i] = 1 and markCol[j] = 1
+ * 
+ * after this again iterate over the 2D array:
+ * and if markRow[i] == 1 or markRow[j] == 1 put arr[i][j] = 0
+ * 
+ * markRow/markCol:  |0  1  0|
+ * 
+ *        |0|        |1  1  1|
+ *        |1|        |1  0  1|
+ *        |0|        |1  1  1|
+ * 
+ * markRow = [0,1,0] and markCol = [0,1,0]
+ * 
+ * markRow/markCol:  |0  1  0|
+ * 
+ *        |0|        |1  0  1|
+ *        |1|        |0  0  0|
+ *        |0|        |1  0  1|
+ * 
+ * 
+ * TC -> O(2*n*m)
+ * SC -> O(n+m)
  */
 
  #include<iostream>
@@ -65,12 +95,37 @@
     }
  }
 
+ // Optimal
+  void setMatrixZeros2(vector<vector<int>> &v){
+    int rows = v.size();
+    int cols = v[0].size();
+
+    int markRow[rows] = {0};
+    int markCol[cols] = {0};
+
+    for(int i = 0; i < rows; i++){
+        for(int j = 0; j < cols; j++){
+            if(v[i][j] == 0){
+                markRow[i] = 1;
+                markCol[j] = 1;
+            }
+        }
+    }
+
+    for(int i = 0; i < rows; i++){
+        for(int j = 0; j < cols; j++){
+            if(markRow[i] == 1 || markCol[j] == 1) v[i][j] = 0;
+        }
+    }
+ }
+
  //****************************************************************************** */
 
  int main(){
     vector<vector<int>> matrix ={{0,1,2,0},{3,4,5,2},{1,3,1,5}};
 
-    setMatrixZeros1(matrix);
+    // setMatrixZeros1(matrix);
+    setMatrixZeros2(matrix);
 
     for(auto &x: matrix){
         for(auto el: x)
