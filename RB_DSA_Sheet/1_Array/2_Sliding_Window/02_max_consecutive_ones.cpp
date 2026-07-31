@@ -86,13 +86,12 @@ int maxConsecBits(vector<int> &arr) {
         }
         else{
             if(arr[j] == 1){
-                ct_1 = 0;
+                ct_1 = 1;
             }
             else{
-                ct_0 = 0;                    
+                ct_0 = 1;                    
             }
             i = j;
-            continue;
         }
         max_ct = max(max_ct, ct_1 > ct_0? ct_1:ct_0);
         j++;
