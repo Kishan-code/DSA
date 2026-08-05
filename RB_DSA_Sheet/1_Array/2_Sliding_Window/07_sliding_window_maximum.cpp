@@ -31,7 +31,7 @@ Output: [1]
  
 
 Constraints:
-1 <= nums.length <= 10⁵⁴
+1 <= nums.length <= 10⁵
 -10⁴ <= nums[i] <= 10⁴
 1 <= k <= nums.length
 */
@@ -59,6 +59,6 @@ int main(){
     vector<int> ans = maxSlidingWindow(nums, k);
 
     for(auto x: ans) cout<<x<<" ";
-    
+
     return 0;
 }
