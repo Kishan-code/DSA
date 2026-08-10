@@ -97,7 +97,7 @@ vector<vector<int>> fourSum3(vector<int>& nums, int target){
     vector<vector<int>> res;
     int n = nums.size();
 
-    int sum = 0;
+    long long sum = 0;
     int low, high;
 
     sort(nums.begin(), nums.end());
@@ -109,7 +109,7 @@ vector<vector<int>> fourSum3(vector<int>& nums, int target){
             low = j+1;
             high = n-1;
             while(low < high){
-                sum = nums[i] + nums[j] + nums[low] + nums[high];
+                sum = (long long)nums[i] + nums[j] + nums[low] + nums[high];
                 if(sum == target){
                     res.push_back({nums[i], nums[j], nums[low], nums[high]});
                     while(low < high && nums[low] == nums[low+1]) low++;
